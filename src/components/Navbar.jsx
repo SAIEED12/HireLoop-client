@@ -2,9 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { signOut, useSession } from "@/lib/auth-client";
+import { Button } from "@heroui/react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data:session, isPending } = useSession();
+  const user = session?.user;
+  
+  const handleSignOut = async()=>{
+    await signOut()
+  }
 
   const navLinks = [
     { name: "Browse Jobs", href: "#" },
@@ -56,19 +64,25 @@ export default function Navbar() {
                 
                 {/* Sign In */}
                 <li>
+                  {
+                    user?
+                    <>
+                    Hi,{user.name}!
+                    <Button onClick={handleSignOut} variant="ghost">Sign Out</Button>
+                    </> :
                   <Link 
-                    href="#" 
+                    href="/signin" 
                     className="text-sm text-indigo-400 hover:text-indigo-300 font-medium transition-colors"
                   >
                     Sign In
-                  </Link>
+                  </Link>}
                 </li>
               </ul>
             </div>
 
             {/* Get Started Button */}
             <Link 
-              href="#" 
+              href="/signup" 
               className="bg-white text-black text-sm font-medium rounded-xl px-6 py-2.5 shadow-sm hover:bg-gray-100 transition-colors text-center"
             >
               Get Started
@@ -118,7 +132,7 @@ export default function Navbar() {
             ))}
             <li>
               <Link
-                href="#"
+                href="/signin"
                 className="block px-3 py-3 rounded-md text-base font-medium text-indigo-400 hover:bg-zinc-800 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -127,7 +141,7 @@ export default function Navbar() {
             </li>
             <li className="pt-4 pb-2">
               <Link 
-                href="#" 
+                href="/signup" 
                 className="block text-center bg-white text-black font-medium rounded-xl w-full py-3 shadow-sm hover:bg-gray-100 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >

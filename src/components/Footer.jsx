@@ -1,10 +1,5 @@
 import Link from "next/link";
-import {
-  LogoFacebook,
-  LogoLinkedin,
-  LogoGithub,
-} from "@gravity-ui/icons";
-
+import { LogoFacebook, LogoLinkedin, LogoGithub } from "@gravity-ui/icons";
 
 export default function Footer() {
   return (
@@ -15,20 +10,28 @@ export default function Footer() {
           {/* LEFT */}
           <div className="space-y-6">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-500">
-                <span className="text-xl font-bold text-white">P</span>
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 cursor-pointer w-max hover:opacity-90 transition-opacity"
+            >
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#c928ff] to-[#6042ff] flex items-center justify-center shadow-lg shadow-purple-900/20">
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
               </div>
-
-              <div className="leading-none">
-                <h2 className="text-xl font-bold">HireLoop</h2>
-              </div>
+              <span className="text-2xl font-bold text-white tracking-wide">
+                HireLoop
+              </span>
             </Link>
 
             {/* Description */}
             <p className="max-w-xs leading-8 text-gray-400">
-              The AI-native career platform. Built for people who take
-              their work seriously.
+              The AI-native career platform. Built for people who take their
+              work seriously.
             </p>
 
             {/* Social Icons */}
