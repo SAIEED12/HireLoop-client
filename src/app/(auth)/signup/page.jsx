@@ -27,7 +27,7 @@ export default function SignUpPage() {
         email: email,
         password: password,
         name: name,
-        callbackURL: "/", // Preserved from your snippet
+        callbackURL: "/", 
       });
 
       if (authError) {
@@ -43,69 +43,59 @@ export default function SignUpPage() {
   };
 
   return (
-    // Main wrapper matching the SignIn page
     <div className="min-h-screen bg-[#09090b] flex font-sans relative overflow-hidden">
       
-      {/* GLOBAL BACKGROUND GLOWS */}
-      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/15 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute top-[20%] right-[20%] w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none" />
+      {/* GLOBAL BACKGROUND GLOWS - Adjusted for a slightly different hue on Sign Up */}
+      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[30%] left-[30%] w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none" />
 
-      {/* LEFT PANEL */}
-      <div className="hidden lg:flex w-1/2 p-12 lg:p-20 flex-col justify-center relative z-10">
+      {/* LEFT PANEL - Redesigned for Sign Up (Focus on Trust & Scale) */}
+      <div className="hidden lg:flex w-1/2 p-12 lg:p-20 flex-col justify-between relative z-10">
         
-        {/* Content Wrapper */}
-        <div className="w-full max-w-[520px] mx-auto flex flex-col gap-12">
-          
-
-          {/* Hero Copy & Features */}
-          <div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-white leading-[1.15] mb-8">
-              Your next great career move starts here.
-            </h2>
-            
-            <ul className="space-y-5">
-              {[
-                "Access thousands of exclusive job postings.",
-                "Connect directly with verified tech recruiters.",
-                "Track your applications with our smart dashboard."
-              ].map((feature, idx) => (
-                <li key={idx} className="flex items-center gap-4 text-zinc-300">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20">
-                    <svg className="w-3.5 h-3.5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span className="text-base">{feature}</span>
-                </li>
-              ))}
-            </ul>
+        {/* Logo (Top) */}
+        <Link href="/" className="flex items-center gap-2.5 cursor-pointer w-max hover:opacity-90 transition-opacity">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#c928ff] to-[#6042ff] flex items-center justify-center shadow-lg shadow-purple-900/20">
+            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
           </div>
+          <span className="text-2xl font-bold text-white tracking-wide">HireLoop</span>
+        </Link>
 
-          {/* Testimonial */}
-          <div className="mt-4 p-6 bg-zinc-900/40 rounded-2xl border border-zinc-800/50 backdrop-blur-md">
-            <div className="flex text-yellow-500 mb-4 gap-1">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
+        {/* Center Content: Value Prop & Metrics */}
+        <div className="w-full max-w-[520px] mx-auto flex flex-col mt-16">
+          <h2 className="text-4xl lg:text-5xl font-bold text-white leading-[1.15] mb-6">
+            Join thousands of professionals finding work they love.
+          </h2>
+          <p className="text-zinc-400 text-lg leading-relaxed mb-12">
+            Build your profile once, get matched with top tech companies globally, and track your applications in one unified dashboard.
+          </p>
+
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 gap-6">
+            <div className="bg-zinc-900/40 border border-zinc-800/50 rounded-2xl p-6 backdrop-blur-sm">
+              <div className="text-3xl font-bold text-white mb-1">50k+</div>
+              <div className="text-sm text-zinc-500 font-medium uppercase tracking-wider">Active Jobs</div>
             </div>
-            <p className="text-zinc-300 italic mb-5 leading-relaxed text-sm lg:text-base">
-              &quot;HireLoop made finding my new role incredibly seamless. The platform is beautiful, intuitive, and the recruiters reply incredibly fast.&quot;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-zinc-800 rounded-full flex items-center justify-center text-white font-medium text-sm border border-zinc-700">
-                SJ
-              </div>
-              <div>
-                <p className="text-white text-sm font-semibold">Sarah Jenkins</p>
-                <p className="text-zinc-500 text-xs">Senior Frontend Engineer</p>
-              </div>
+            <div className="bg-zinc-900/40 border border-zinc-800/50 rounded-2xl p-6 backdrop-blur-sm">
+              <div className="text-3xl font-bold text-white mb-1">98%</div>
+              <div className="text-sm text-zinc-500 font-medium uppercase tracking-wider">Response Rate</div>
             </div>
           </div>
-
         </div>
+
+        {/* Bottom Content: Trusted By */}
+        <div className="mt-16">
+          <p className="text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-6">Trusted by innovative teams</p>
+          <div className="flex items-center gap-8 opacity-60 grayscale">
+            {/* Mock Company Logos (SVG text for demonstration) */}
+            <div className="text-xl font-bold text-white tracking-tighter">Acme Corp</div>
+            <div className="text-xl font-black text-white italic">GlobalTech</div>
+            <div className="text-lg font-bold text-white uppercase tracking-widest">Nexus</div>
+          </div>
+        </div>
+
       </div>
 
       {/* RIGHT PANEL - The Auth Form */}
