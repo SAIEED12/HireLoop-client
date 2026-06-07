@@ -6,6 +6,7 @@ import { Button } from "@heroui/react";
 import { Person, Envelope, Lock, Eye, EyeSlash } from "@gravity-ui/icons";
 import { authClient } from "@/lib/auth-client";
 import { Description, Label, Radio, RadioGroup } from "@heroui/react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
@@ -15,7 +16,10 @@ export default function SignUpPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [role, setRole] = useState("seeker")
+  const [role, setRole] = useState("seeker");
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,13 +33,16 @@ export default function SignUpPage() {
         password: password,
         name: name,
         role,
-        callbackURL: "/",
       });
 
       if (authError) {
         setError(authError.message || "Something went wrong during sign up.");
       } else {
         setSuccess("Account created successfully!");
+        setName("");
+        setEmail("");
+        setPassword("");
+        router.push(redirectTo);
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");
@@ -218,7 +225,6 @@ export default function SignUpPage() {
                 </button>
               </div>
             </div>
-          
 
             {/* Role Selection */}
             <div className="flex flex-col gap-4">
@@ -227,7 +233,7 @@ export default function SignUpPage() {
                 defaultValue="seeker"
                 name="role"
                 orientation="horizontal"
-                onChange={value => setRole(value)}
+                onChange={(value) => setRole(value)}
               >
                 <Radio value="seeker">
                   <Radio.Control>
@@ -260,7 +266,7 @@ export default function SignUpPage() {
           <div className="mt-8 text-center text-sm text-zinc-400">
             Already have an account?{" "}
             <Link
-              href="/signin"
+              href={`/signin?redirect=${redirectTo}`}
               className="text-white font-medium hover:text-purple-400 transition-colors"
             >
               Sign In
