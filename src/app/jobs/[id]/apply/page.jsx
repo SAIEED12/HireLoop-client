@@ -43,8 +43,8 @@ const ApplyPage = async ({ params }) => {
 
     const applications = await getApplicationsByApplicant(user.id);
 
-    const plan = await getPlanById(user?.plan || 'seeker_free')
-    
+    const plan = await getPlanById(user?.plan || 'seeker_free') 
+
     const job = await getJobById(id);
 
     const applicationCount = applications?.length || 0;
