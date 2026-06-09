@@ -1,3 +1,6 @@
+const dns = require("node:dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 import { getJobById } from '@/lib/api/jobs';
 import { getUserSession } from '@/lib/core/session';
 import { redirect } from 'next/navigation';
@@ -48,10 +51,10 @@ const ApplyPage = async ({ params }) => {
     const job = await getJobById(id);
 
     const applicationCount = applications?.length || 0;
-    const hasReachedLimit = applicationCount >= plan.maxApplicationsPerMonth;
+    const hasReachedLimit = applicationCount >= plan.maxApplicationPerMonth;
     
     // Calculate application usage percentage for a beautiful dynamic progress bar
-    const usagePercentage = Math.min((applicationCount / plan.maxApplicationsPerMonth) * 100, 100);
+    const usagePercentage = Math.min((applicationCount / plan.maxApplicationPerMonth) * 100, 100);
 
     return (
         <div className="w-full min-h-screen bg-zinc-950 text-zinc-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -65,7 +68,7 @@ const ApplyPage = async ({ params }) => {
                                 Monthly Quota Status
                             </span>
                             <h2 className="text-lg font-bold text-zinc-100 mt-0.5">
-                                You have applied to <span className="text-blue-400">{applicationCount}</span> out of <span className="text-zinc-400">{plan.maxApplicationsPerMonth}</span> positions
+                                You have applied to <span className="text-blue-400">{applicationCount}</span> out of <span className="text-zinc-400">{plan.maxApplicationPerMonth}</span> positions
                             </h2>
                         </div>
                         <span className="self-start sm:self-center px-2.5 py-1 text-xs font-medium rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700">
