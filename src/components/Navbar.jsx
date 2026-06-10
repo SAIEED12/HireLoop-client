@@ -20,6 +20,18 @@ export default function Navbar() {
     { name: "Pricing", href: "/plans" },
   ];
 
+  const dashboardLinks = {
+    seeker: '/dashboard/seeker',
+    recruiter: '/dashboard/recruiter'
+  }
+
+  if(user?.email){
+    navLinks.push({
+      name: "Dashboard",
+      href: dashboardLinks[user?.role || 'seeker']
+    })
+  }
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-zinc-800/60 bg-[#09090b]/70 backdrop-blur-xl">
       {/* 1. Added sticky top-0, transparent background, and backdrop-blur */}
