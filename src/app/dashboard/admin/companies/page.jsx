@@ -5,6 +5,7 @@ import React from 'react';
 
 const AdminCompaniesPage = async () => {
     const companies = await getCompanies();
+    console.log("DEBUG: Data returned from API:", companies);
     
     return (
         <div className="min-h-screen bg-[#0d0d0f] p-8 text-neutral-100">
