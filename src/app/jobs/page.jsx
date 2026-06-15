@@ -7,7 +7,7 @@ export default async function Page({searchParams}) {
   const filters = await searchParams
   const filterObj = {...filters, isRemote: filters.isRemote === 'true' ? true : false}
 
-  const querySearch = new URLSearchParams(filterObj)
+  const querySearch = new URLSearchParams(filters)
   const queryString = querySearch.toString()
 
 
